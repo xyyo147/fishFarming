@@ -1,0 +1,57 @@
+{
+  "clearInfo": {
+    "clearUrl": "api/clear.json"
+  },
+  "homeInfo": {
+    "title": "首页",
+    "icon": "fa fa-home",
+    "href": "page/dead.html"
+  },
+  "logoInfo": {
+    "title": "鱼塘管理系统",
+    "image": "images/logo.png",
+    "href": ""
+  },
+  "menuInfo": {
+    "currency": {
+      "title": "鱼塘管理",
+      "icon": "fa fa-address-book",
+      "child": [
+        {
+          "title": "鱼塘管理",
+          "href": "page/table.html",
+          "icon": "fa fa-file-text",
+          "target": "_self",
+          "child": [
+            {
+              "title": "死亡记录",
+              "href": "page/dead.html",
+              "icon": "fa fa-list-alt",
+              "target": "_self"
+            },{
+              "title": "投入记录",
+              "href": "page/input.html",
+              "icon": "fa fa-list-alt",
+              "target": "_self"
+            },
+            {
+              "title": "产出记录",
+              "href": "page/output.html",
+              "icon": "fa fa-list-alt",
+              "target": "_self"
+            },
+            {
+              "title": "用药记录",
+              "href": "page/medicine.html",
+              "icon": "fa fa-list-alt",
+              "target": "_self"
+            }
+          ]
+        }
+
+
+      ]
+    }
+
+  }
+}
