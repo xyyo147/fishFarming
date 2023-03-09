@@ -15,8 +15,8 @@ import com.example.fishfarming.entity.Dead;
  * @since 2023-02-28 21:01:54
  */
 public interface DeadService extends IService<Dead> {
-    public Result findData(Long userid);
-    public Result remove(String name);
+    public Result findData(Long userid,Long pondid);
+    public Result remove(Long id);
     public Long search(Dead dead);
 }
 

@@ -8,6 +8,8 @@ import java.util.Date;
 public class ResultVO {
     private Long id;
 
+    private String dbScripId;
+
     private Date time;
 
     private String amount;

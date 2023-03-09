@@ -25,16 +25,16 @@ public class DeadServiceImpl extends ServiceImpl<DeadMapper, Dead>  implements D
     @Autowired
     private FishpondMapper fishpondMapper;
     @Override
-    public Result findData(Long userid) {
+    public Result findData(Long userid,Long pondid) {
         List<ResultVO> resultVOList=new ArrayList<>();
         Long uid;
         if (userid==null) uid=1l;
                 else uid=userid;
 
         QueryWrapper wrapper = new QueryWrapper();
-        wrapper.eq("user_id",uid);
+        wrapper.eq("user_id",uid );
+        wrapper.eq("pond_id",pondid);
         List<Fishpond> fishpondList=fishpondMapper.selectList(wrapper);//查询userid在池塘表里的鱼塘
-
         for(Fishpond fishpond : fishpondList){
             wrapper =new QueryWrapper();
             wrapper.eq("pond_id",fishpond.getId());//获取池塘id
@@ -46,8 +46,11 @@ public class DeadServiceImpl extends ServiceImpl<DeadMapper, Dead>  implements D
                 wrapper =new QueryWrapper();
                 wrapper.eq("id",dead.getPondId());
                 Fishpond fishpond1 =fishpondMapper.selectOne(wrapper);
-                if(fishpond1!=null)
+                if(fishpond1!=null){
                     resultVO.setPondName(fishpond1.getName());
+                    resultVO.setDbScripId(dead.getId().toString());
+                }
+
                 resultVOList.add(resultVO);
             }
         }
@@ -55,9 +58,9 @@ public class DeadServiceImpl extends ServiceImpl<DeadMapper, Dead>  implements D
         return Result.succ("查找成功",resultVOList);
     }
     @Override
-    public Result remove(String name) {
+    public Result remove(Long id) {
         QueryWrapper wrapper = new QueryWrapper();
-        wrapper.eq("name",name);
+        wrapper.eq("id",id);
         Dead dead= deadMapper.selectOne(wrapper);
         if (dead!=null){
             super.removeById(dead.getId());

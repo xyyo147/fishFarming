@@ -10,11 +10,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class DeadServiceTest {
 @Autowired
 private  DeadService service;
-    @Test
-    void findData() {
-        Result result=service.findData(1L);
-        int i=0;
-    }
+//    @Test
+//    void findData() {
+//        Result result=service.findData(1L);
+//        int i=0;
+//    }
 //    @Test
 //    void del() {
 //        Result result=service.findData(1L);

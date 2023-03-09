@@ -56,17 +56,17 @@
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
-            var index = layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            }, function () {
-
-                // 关闭弹出层
-                layer.close(index);
-
-                var iframeIndex = parent.layer.getFrameIndex(window.name);
-                parent.layer.close(iframeIndex);
-
-            });
+            // var index = layer.alert(JSON.stringify(data.field), {
+            //     title: '最终的提交信息'
+            // }, function () {
+            //
+            //     // 关闭弹出层
+            //     layer.close(index);
+            //
+            //     var iframeIndex = parent.layer.getFrameIndex(window.name);
+            //     parent.layer.close(iframeIndex);
+            //
+            // });
 			del();
             return false;
         });
@@ -75,7 +75,6 @@
 	function del(){
 		var name = $("#name").val();
 
-		
 		$.ajax({
 		    url: 'http://localhost:8080/deaddel',
 		    type: 'post',

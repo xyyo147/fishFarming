@@ -86,12 +86,12 @@
             }],
             cols: [[
                 {type: "checkbox", width: 50, fixed: "left"},
-                // {field: 'id', width: 80, title: 'ID'},
-                // {field: 'pondName', width: 80, title: '鱼塘名'},
+                {field: 'dbScripId', width: 180, title: 'ID'},
+                {field: 'pondName', width: 80, title: '鱼塘名'},
                 {field: 'name', width: 160, title: '死亡种类'},
                 {field: 'amount', width: 80, title: '数量', sort: true},
-                // {field: 'time', width: 180, title: '时间', sort: true},
-                // {title: '操作', minWidth: 50, templet: '#currentTableBar', fixed: "right", align: "center"}
+                {field: 'time', width: 180, title: '时间', sort: true},
+                {title: '操作', minWidth: 50, templet: '#currentTableBar', fixed: "right", align: "center"}
             ]],
             limits: [10, 15, 20, 25, 50, 100],
             limit: 15,
@@ -158,25 +158,8 @@
         $(".data-delete-btn").on("click", function () {
             var checkStatus = table.checkStatus('currentTableId')
                 , data = checkStatus.data;
-            // var obj=JSON.stringify(data);
-            // var uid=obj['id'];
-            // layer.alert(obj);
-
-            // layer.alert(uid);
-            // $.ajax({
-            //     url: 'http://localhost:8080/deaddel',
-            //     type: 'post',
-            //     data:obj,
-            //     success:function (data){
-            //         if(data.success)
-            //         layer.msg("删除成功，"+data.msg);
-            //         else
-            //             layer.msg("删除失败，"+data.msg);
-            //     },
-            //     error:function (data){
-            //         layer.msg("删除失败，"+data.msg);
-            //     }
-            // })
+            var obj=JSON.stringify(data);
+            console.log(data)
             var index = layer.open({
                 title: '删除记录',
                 type: 2,
@@ -195,7 +178,7 @@
 
         //监听表格复选框选择
         table.on('checkbox(currentTableFilter)', function (obj) {
-            console.log(obj)
+            // console.log(obj)
         });
 
         table.on('tool(currentTableFilter)', function (obj) {
@@ -217,6 +200,27 @@
                 return false;
             } else if (obj.event === 'delete') {
                 layer.confirm('真的删除行么', function (index) {
+
+                    $.ajax({
+                        url: 'http://localhost:8080/delete',
+                        type: 'get',
+                        dataType:'json',
+                        data:{id:data.dbScripId},
+                        success:function (data){
+                            if(data.success){
+                                table.reload();
+                                layer.msg("删除成功，"+data.msg);
+                            }
+
+                            else{
+                                table.reload();layer.msg("删除失败，"+data.msg);
+                            }
+
+                        },
+                        error:function (data){
+                            layer.msg("删除失败，"+data.msg);
+                        }
+                    })
                     obj.del();
                     layer.close(index);
                 });

@@ -21,8 +21,8 @@ public class Dead implements Serializable {
     private static final long serialVersionUID = 830852127636267368L;
     
     private Long id;
-//
-//    @TableField(fill = FieldFill.INSERT)
+
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime time;
     
     private String amount;
@@ -31,6 +31,17 @@ public class Dead implements Serializable {
 
 //    @TableField(fill = FieldFill.INSERT)
     private Long pondId;
+
+    @TableField(fill = FieldFill.INSERT)
+    private Long userId;
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public void setPondId(Long pondId) {
         this.pondId = pondId;

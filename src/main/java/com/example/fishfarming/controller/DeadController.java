@@ -41,19 +41,29 @@ public class DeadController {
     @ResponseBody
     @RequestMapping("/deadlist")
     public Result list(HttpServletRequest request)  {
-//        Loginid loginid= loginidService.getOne(new QueryWrapper<>());
-//        Long id=loginid.getId();
+
         Long userId = (Long) request.getSession().getAttribute("user");
         log.info("userid是"+ userId );
-//        log.info("正在請求死亡池塘表的userid是"+ id );
-        return deadService.findData(userId);
+        return deadService.findData(userId,1L);//需要修改
     }
+
     @ResponseBody
-    @RequestMapping("/deaddel")
-    public Result del(String name)  {
-    Result result= deadService.remove(name);
+    @RequestMapping(value = "/delete",method = RequestMethod.GET)
+    public Result get(HttpServletRequest request)  {
+
+        String id = request.getParameter("id");
+        Long dead_id= Long.parseLong(id);
+        log.info("接收到了"+dead_id);
+        Result result= deadService.remove(dead_id);
         return result;
     }
+
+//    @ResponseBody
+//    @RequestMapping("/deaddel")
+//    public Result del(String name)  {
+//    Result result= deadService.remove(name);
+//        return result;
+//    }
     @ResponseBody
     @PostMapping("/addDead")
     public Result register(Dead dead) throws ManageException {
@@ -61,7 +71,7 @@ public class DeadController {
            log.info(dead.getName());
 
            dead.setPondId(1l);
-           dead.setTime(LocalDateTime.now());
+//           dead.setTime(LocalDateTime.now());
         deadService.save(dead);
 
         log.info("dead添加成功");
